@@ -17,6 +17,7 @@ void	ft_send_bit(int pid, char *str)
 {
 	int	i;
 	int	shifting;
+	int	check_pid;
 
 	i = 0;
 	while (str[i])
@@ -25,14 +26,16 @@ void	ft_send_bit(int pid, char *str)
 		while (shifting >= 0)
 		{
 			if ((str[i] >> shifting) & 1)
-				kill(pid, SIGUSR1);
+				check_pid = kill(pid, SIGUSR1);
 			else
-				kill(pid, SIGUSR2);
+				check_pid = kill(pid, SIGUSR2);
 			usleep(9);
 			shifting--;
 		}
 		i++;
 	}
+	if (check_pid == -1)
+		ft_printf("pid is wrong\n");
 }
 
 int	ft_check_pid(char *s)
