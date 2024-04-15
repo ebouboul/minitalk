@@ -45,6 +45,8 @@ int	ft_check_pid(char *s)
 	int	i;
 
 	i = 0;
+	if (s[i] == '0' && s[1] == '\0')
+		return (0);
 	while (s[i])
 	{
 		if (ft_isdigit(s[i]) == 0)
